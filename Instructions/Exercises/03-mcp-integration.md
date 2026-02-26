@@ -2,6 +2,8 @@
 lab:
     title: 'Extend agents with Model Context Protocol (MCP) tools'
     description: 'Extend agent capabilities by integrating Model Context Protocol (MCP) server tools.'
+    level: 300
+    duration: 60
 ---
 
 # Develop an AI agent with Model Context Protocol (MCP) tools
@@ -69,14 +71,14 @@ In this task, you'll deploy a model from the Model Catalog to use with your agen
 
    > **Tip**: You can also access the Model Catalog by selecting the **+** icon next to **Models** in the Resources section, or by pressing **F1** and running the command **Microsoft Foundry: Open Model Catalog**.
 
-1. In the Model Catalog, locate the **gpt-4** model (you can use the search bar to find it quickly).
+1. In the Model Catalog, locate the **gpt-4.1** model (you can use the search bar to find it quickly).
 
     ![Screenshot of the Model Catalog in the Foundry VS Code extension.](Media/vs-code-model.png)
 
-1. Select **Deploy** next to the gpt-4 model.
+1. Select **Deploy** next to the gpt-4.1 model.
 
 1. Configure the deployment settings:
-   - **Deployment name**: Enter a name like "gpt-4"
+   - **Deployment name**: Enter a name like "gpt-4.1"
    - **Deployment type**: Select **Global Standard** (or **Standard** if Global Standard is not available)
    - **Model version**: Leave as default
    - **Tokens per minute**: Leave as default
@@ -105,9 +107,11 @@ For this exercise, you'll use starter code that will help you connect to your Fo
 
 1. Right-click on the **requirements.txt** file and select **Open in Integrated Terminal**.
 
-1. In the terminal, enter the following command to install the required Python packages:
+1. In the terminal, enter the following command to install the required Python packages in a virtual environment:
 
     ```
+    python -m venv labenv
+    .\labenv\Scripts\Activate.ps1
     pip install -r requirements.txt
     ```
 
@@ -530,7 +534,9 @@ In this task, you'll connect the MCP server tools to your agent so that it can c
    What are the best sellers this week?
     ```
 
-    Enter `quit` when you're done.
+1. Enter `quit` to exit the application.
+
+    You can also use `deactivate` to exit the Python virtual environment in the terminal.
 
 ## Summary
 
