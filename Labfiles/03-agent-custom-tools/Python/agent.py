@@ -3,7 +3,12 @@ import json
 from dotenv import load_dotenv
 
 # Add references
-
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import FunctionTool
+from azure.identity import DefaultAzureCredential
+from azure.ai.projects.models import PromptAgentDefinition, FunctionTool
+from openai.types.responses.response_input_param import FunctionCallOutput, ResponseInputParam
+from functions import next_visible_event, calculate_observation_cost, generate_observation_report
 
 def main(): 
     # Clear the console
@@ -15,10 +20,29 @@ def main():
     model_deployment = os.getenv("MODEL_DEPLOYMENT_NAME")
 
     # Connect to the project client
-    
+    with (
+        DefaultAzureCredential() as credential,
+        AIProjectClient(endpoint=project_endpoint, credential=credential) as project_client,
+        project_client.get_openai_client() as openai_client,
+    ): 
 
         # Define the event function tool
-        
+        event_tool = FunctionTool(
+            name="next_visible_event",
+            description="Get the next visible event in a given location.",
+            parameters={
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "continent to find the next visible event in (e.g. 'north_america', 'south_america', 'australia')",
+                    },
+                },
+                "required": ["location"],
+                "additionalProperties": False,
+            },
+            strict=True,
+        )
 
         # Define the observation cost function tool
         
